@@ -1,0 +1,39 @@
+  {
+  "name": "@atlas-stats/sdk",
+  "version": "0.0.0",
+  "description": "Official JavaScript/TypeScript client for the Atlas Stats API",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+    "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "generate": "openapi --input https://raw.githubusercontent.com/Atlas-Stats/atlasstats-spec/main/openapi.json --output ./src/generated --client fetch --name AtlasStatsClient",
+    "build": "tsup src/index.ts --format cjs,esm --dts --clean",
+    "prepublishOnly": "npm run generate && npm run build"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": ["atlas-stats", "sdk", "api", "typescript"],
+  "author": "Atlas Stats",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@types/node": "^20.11.24",
+    "openapi-typescript-codegen": "^0.29.0",
+    "tsup": "^8.0.2",
+    "typescript": "^5.4.2"
+  }
+}
